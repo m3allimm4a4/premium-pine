@@ -2,7 +2,10 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import './scss/reset.scss';
 @import './scss/animate.scss';
-@import './scss/responsive.scss';
+@import './scss/reset.scss';
 @import './scss/style.scss';
+@import './scss/responsive.scss';
+@import './scss/niceselect.scss';
+@import './scss/flex-slider.scss';
+@import './scss/slicknav.scss';

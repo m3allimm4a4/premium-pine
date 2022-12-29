@@ -1,0 +1,33 @@
+<div class="main-sidebar">
+  <div class="single-widget category">
+    <h3 class="title">Categories</h3>
+    <ul class="categor-list">
+      <li *ngFor="let category of categories">
+        <a routerLink="/product-list" [queryParams]="{ category: category.id }">
+          {{ category.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="single-widget recent-post">
+    <h3 class="title">New Products</h3>
+
+    <div class="single-post" *ngFor="let product of newProducts">
+      <div class="image">
+        <img [src]="product.cardImageUrl" [alt]="product.name" />
+      </div>
+      <div class="content">
+        <h5>
+          <a [routerLink]="['/product-details', product.id]">{{ product.name }}</a>
+        </h5>
+        <ul class="comment">
+          <li>
+            <i><fa-icon [icon]="faCalendar"></fa-icon></i>
+            {{ product.createdDate?.toLocaleDateString() }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
