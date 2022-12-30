@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { Product, ProductResponse } from '../shared/models/product.interface';
+import { Banner } from '../shared/models/banner.interface';
+import { SliderItem } from '../shared/models/slider.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +27,13 @@ export class HomeService {
           });
         })
       );
+  }
+
+  public getBanners(): Observable<Banner[]> {
+    return this.http.get<Banner[]>(`${environment.api_url}banners.php`);
+  }
+
+  public getSlider(): Observable<SliderItem[]> {
+    return this.http.get<SliderItem[]>(`${environment.api_url}slider.php`);
   }
 }
