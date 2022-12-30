@@ -9,28 +9,39 @@ import { HomeService } from '../home.service';
   styleUrls: ['./trending-items.component.scss'],
 })
 export class TrendingItemsComponent implements OnInit {
-  public trendingProducts: Product[] = [];
+  public filteredTrendingItems: Product[] = [];
   public categories: Category[] = [];
   public activeCategory: Category = {} as Category;
   public showTab = false;
+
+  private trendingItems: Product[] = [];
 
   constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
     this.homeService.getTrendingItems().subscribe(trendingItems => {
-      this.trendingProducts = trendingItems.products;
-      this.categories = trendingItems.categories;
+      trendingItems.forEach(item => {
+        const category = this.categories.find(c => c.id === item.category.id);
+        if (!category) {
+          this.categories.push(item.category);
+        }
+      });
+      this.trendingItems = trendingItems;
       this.activeCategory = this.categories[0];
-      this.showTab = true;
+      this.filterTrendingItems();
     });
   }
 
   switchCategory(category: Category) {
     this.activeCategory = category;
+    this.filterTrendingItems();
+  }
+
+  private filterTrendingItems() {
     this.showTab = false;
-    this.homeService.getTrendingItems(category).subscribe(trendingItems => {
-      this.trendingProducts = trendingItems.products;
-      this.showTab = true;
-    });
+    this.filteredTrendingItems = this.trendingItems.filter(
+      item => item.category.id === this.activeCategory.id
+    );
+    this.showTab = true;
   }
 }

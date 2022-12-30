@@ -1,0 +1,40 @@
+<div class="order-details">
+  <div class="single-widget">
+    <h2>CART TOTALS</h2>
+    <div class="content">
+      <ul>
+        <li>
+          Sub Total<span>${{ substotal }}</span>
+        </li>
+        <li>
+          (+) Shipping<span>${{ shipping }}</span>
+        </li>
+        <li>
+          (-) Discount<span>${{ discount }}</span>
+        </li>
+        <li class="last">
+          Total<span>${{ substotal + shipping - discount }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="single-widget">
+    <h2>Payments</h2>
+    <div class="content">
+      <div class="checkbox">
+        <label class="checkbox-inline checked" for="2">
+          <input name="news" id="2" type="radio" checked /> Cash On Delivery
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="single-widget get-button">
+    <div class="content">
+      <div class="button">
+        <button class="btn animate" (click)="placeOrder()">proceed to checkout</button>
+      </div>
+    </div>
+  </div>
+</div>

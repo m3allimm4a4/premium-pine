@@ -9,7 +9,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 export class AppComponent {
   public currentPage = 'home';
 
-  onActivate(component: any) {
+  onActivate(component: Component) {
     if (component instanceof ContactUsComponent) {
       this.currentPage = 'contact-us';
     } else {

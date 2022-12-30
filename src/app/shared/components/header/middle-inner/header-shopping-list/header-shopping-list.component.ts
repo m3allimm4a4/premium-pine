@@ -26,9 +26,11 @@ export class HeaderShoppingListComponent implements OnInit, OnDestroy {
       this.cartService.getItems().subscribe(cartItems => {
         this.cartItems = cartItems;
         this.cartItemsCountChange.emit(cartItems.length);
-        this.totalAmount = cartItems.reduce((sum, currentCartItem) => {
-          return sum + currentCartItem.quantity * currentCartItem.product.price;
-        }, 0);
+      })
+    );
+    this.subsciptions.add(
+      this.cartService.getTotalAmount().subscribe(total => {
+        this.totalAmount = total;
       })
     );
   }

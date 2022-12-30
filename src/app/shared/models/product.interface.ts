@@ -5,12 +5,26 @@ export interface Product {
   id: number;
   name: string;
   cardImageUrl: string;
-  cardhoverImageUrl?: string;
+  cardHoverImageUrl?: string;
   mainImageUrl?: string;
   price: number;
   oldPrice?: number;
   category: Category;
   brand: Brand;
   createdDate?: Date;
+  description?: string;
+}
+
+export interface ProductResponse {
+  id: number;
+  name: string;
+  cardImageUrl: string;
+  cardHoverImageUrl?: string;
+  mainImageUrl?: string;
+  price: number;
+  oldPrice?: number;
+  category: Category;
+  brand: Brand;
+  createdDate: number;
   description?: string;
 }
