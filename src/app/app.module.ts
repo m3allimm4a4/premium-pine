@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartTableComponent } from './cart/cart-table/cart-table.component';
 import { CartTotalAmountComponent } from './cart/cart-total-amount/cart-total-amount.component';
 import { CartComponent } from './cart/cart.component';
-import { CheckoutFormComponent } from './checkout/checkout-form/checkout-form.component';
-import { CheckoutOrderDetailsComponent } from './checkout/checkout-order-details/checkout-order-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactUsFormComponent } from './contact-us/contact-us-form/contact-us-form.component';
 import { ContactUsInfoComponent } from './contact-us/contact-us-info/contact-us-info.component';
@@ -64,10 +63,16 @@ import { ItemCardComponent } from './shared/components/product-card/product-card
     CartTableComponent,
     CartTotalAmountComponent,
     CheckoutComponent,
-    CheckoutFormComponent,
-    CheckoutOrderDetailsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, FontAwesomeModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    NgbModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

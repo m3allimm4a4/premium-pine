@@ -18,7 +18,7 @@ export class CartTotalAmountComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.cartService.getTotalAmount().subscribe(total => {
+      this.cartService.getTotalAmount$().subscribe(total => {
         this.subtotal = total;
       })
     );

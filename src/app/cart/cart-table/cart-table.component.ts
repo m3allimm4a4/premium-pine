@@ -18,7 +18,7 @@ export class CartTableComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.cartService.getItems().subscribe(items => {
+    this.cartService.getItems$().subscribe(items => {
       this.cartItems = items;
     });
   }

@@ -23,13 +23,13 @@ export class HeaderShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subsciptions.add(
-      this.cartService.getItems().subscribe(cartItems => {
+      this.cartService.getItems$().subscribe(cartItems => {
         this.cartItems = cartItems;
         this.cartItemsCountChange.emit(cartItems.length);
       })
     );
     this.subsciptions.add(
-      this.cartService.getTotalAmount().subscribe(total => {
+      this.cartService.getTotalAmount$().subscribe(total => {
         this.totalAmount = total;
       })
     );

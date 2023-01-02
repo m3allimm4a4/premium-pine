@@ -9,11 +9,15 @@ import { Product } from '../shared/models/product.interface';
 export class CartService {
   private cartItems$ = new BehaviorSubject<CartItem[]>([]);
 
-  public getItems(): Observable<CartItem[]> {
+  public getItems$(): Observable<CartItem[]> {
     return this.cartItems$.asObservable();
   }
 
-  public getTotalAmount(): Observable<number> {
+  public getItems(): CartItem[] {
+    return this.cartItems$.value;
+  }
+
+  public getTotalAmount$(): Observable<number> {
     return this.cartItems$.pipe(
       map(cartItems => {
         return cartItems.reduce((sum, currentCartItem) => {
@@ -21,6 +25,12 @@ export class CartService {
         }, 0);
       })
     );
+  }
+
+  public getTotalAmount(): number {
+    return this.cartItems$.value.reduce((sum, currentCartItem) => {
+      return sum + currentCartItem.quantity * currentCartItem.product.price;
+    }, 0);
   }
 
   public addItem(product: Product): void {
