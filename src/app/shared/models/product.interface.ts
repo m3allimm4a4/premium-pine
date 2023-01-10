@@ -33,8 +33,12 @@ export interface ProductCreate {
   name: string;
   price: number;
   oldPrice: number;
+  description: string;
+  mainImage: File;
+  cardImage: File;
+  cardHoverImage: File;
+  createdDate: number;
+  trending: boolean;
   categoryId: number;
   brandId: number;
-  createdDate: number;
-  description: string;
 }

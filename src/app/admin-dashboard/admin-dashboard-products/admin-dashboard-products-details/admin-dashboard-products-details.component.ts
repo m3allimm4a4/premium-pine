@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from 'src/app/product-details/product-details.service';
 import { Category } from 'src/app/shared/models/category.interface';
+import { ProductCreate } from 'src/app/shared/models/product.interface';
 import { InitializationService } from 'src/app/shared/services/initialization/initialization.service';
 
 @Component({
@@ -31,11 +32,19 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     categoryId: new FormControl(0, {
       nonNullable: true,
     }),
-    mainImage: new FormControl(),
+    trending: new FormControl(false, {
+      nonNullable: true,
+    }),
+    mainImage: new FormControl('', [Validators.required]),
     mainImageFile: new FormControl(),
+    cardImage: new FormControl('', [Validators.required]),
+    cardImageFile: new FormControl(),
+    cardHoverImage: new FormControl('', [Validators.required]),
+    cardHoverImageFile: new FormControl(),
   });
   public isEditMode = false;
   public categories: Category[] = [];
+  private id = 0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -52,6 +61,8 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
         this.form.patchValue({
           ...p,
         });
+        this.isEditMode = true;
+        this.id = id;
       });
     });
     this.initializationService.getAllCategories().subscribe(c => {
@@ -60,8 +71,28 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
     });
   }
 
-  public onSubmit() {
-    console.log(this.form.controls.mainImage.value);
+  public onSubmit(): void {
+    if (!this.form.valid) return;
+
+    const product: ProductCreate = {
+      brandId: 1,
+      name: this.form.controls.name.value,
+      price: this.form.controls.price.value,
+      oldPrice: this.form.controls.oldPrice.value,
+      trending: this.form.controls.trending.value,
+      description: this.form.controls.description.value,
+      createdDate: new Date().valueOf(),
+      categoryId: this.form.controls.categoryId.value,
+      mainImage: this.form.controls.mainImageFile.value,
+      cardImage: this.form.controls.cardImageFile.value,
+      cardHoverImage: this.form.controls.cardHoverImageFile.value,
+    };
+    const request$ = this.isEditMode
+      ? this.productDetailsService.createOrUpdateProduct(product, this.id)
+      : this.productDetailsService.createOrUpdateProduct(product);
+    request$.subscribe(() => {
+      this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+    });
   }
 
   public onFileChange(event: Event, formControlName: string) {
@@ -74,6 +105,6 @@ export class AdminDashboardProductsDetailsComponent implements OnInit {
 
   public displayInvalidFeedback(controlKey: string): boolean {
     const control = this.form.get(controlKey);
-    return (!control?.valid && control?.touched) || false;
+    return (control?.invalid && control?.touched) || false;
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
-import { Product, ProductResponse } from '../shared/models/product.interface';
+import { Product, ProductCreate, ProductResponse } from '../shared/models/product.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +38,25 @@ export class ProductDetailsService {
           });
         })
       );
+  }
+
+  public createOrUpdateProduct(product: ProductCreate, id?: number): Observable<void> {
+    const formData = new FormData();
+    formData.set('name', product.name);
+    formData.set('price', product.price.toString());
+    formData.set('oldPrice', product.oldPrice.toString());
+    formData.set('description', product.description);
+    formData.set('mainImage', product.mainImage);
+    formData.set('cardImage', product.cardImage);
+    formData.set('cardHoverImage', product.cardHoverImage);
+    formData.set('createdDate', product.createdDate.toString());
+    formData.set('trending', `${product.trending ? 1 : 0}`);
+    formData.set('brandId', product.brandId.toString());
+    formData.set('categoryId', product.categoryId.toString());
+
+    return this.http.post<void>(
+      `${environment.api_url}products.php${id ? `?id=${id}` : ''}`,
+      formData
+    );
   }
 }

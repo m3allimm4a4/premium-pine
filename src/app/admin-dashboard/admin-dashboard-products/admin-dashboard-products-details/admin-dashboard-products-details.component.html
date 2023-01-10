@@ -74,6 +74,38 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Card Image<span>*</span></label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    formControlName="cardImage"
+                    (change)="onFileChange($event, 'cardImageFile')" />
+                  <small *ngIf="displayInvalidFeedback('cardImage')" class="invalid-input">
+                    Card image required
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Card Hover Image<span>*</span></label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    formControlName="cardHoverImage"
+                    (change)="onFileChange($event, 'cardHoverImageFile')" />
+                  <small *ngIf="displayInvalidFeedback('cardHoverImage')" class="invalid-input">
+                    Card hover image required
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-check">
+                  <label class="form-check-label">Trending</label>
+                  <input class="form-check-input" type="checkbox" formControlName="trending" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
                 <button class="btn btn-secondary" type="submit" [disabled]="!form.valid">
                   Submit
                 </button>
