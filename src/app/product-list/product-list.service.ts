@@ -12,9 +12,9 @@ export class ProductListService {
   constructor(private http: HttpClient) {}
 
   public getProductList(
-    categoryId: number,
-    brandId: number,
-    searchString: string
+    categoryId?: number,
+    brandId?: number,
+    searchString?: string
   ): Observable<Product[]> {
     let parameters = {};
     if (categoryId) {

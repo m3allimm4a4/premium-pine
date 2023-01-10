@@ -32,6 +32,17 @@ import { HeaderShoppingListComponent } from './shared/components/header/middle-i
 import { MiddleInnerComponent } from './shared/components/header/middle-inner/middle-inner.component';
 import { TopbarComponent } from './shared/components/header/topbar/topbar.component';
 import { ItemCardComponent } from './shared/components/product-card/product-card.component';
+import { ModalContentComponent } from './shared/components/modal-content/modal-content.component';
+import { AuthComponent } from './auth/auth.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminHeaderComponent } from './admin-dashboard/admin-header/admin-header.component';
+import { AdminDashboardHomeComponent } from './admin-dashboard/admin-dashboard-home/admin-dashboard-home.component';
+import { AdminDashboardCategoriesComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
+import { AdminDashboardCategoriesDetailsComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories-details/admin-dashboard-categories-details.component';
+import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
+import { AdminDashboardOrdersDetailsComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders-details/admin-dashboard-orders-details.component';
+import { AdminDashboardProductsComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products.component';
+import { AdminDashboardProductsDetailsComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-details/admin-dashboard-products-details.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +74,17 @@ import { ItemCardComponent } from './shared/components/product-card/product-card
     CartTableComponent,
     CartTotalAmountComponent,
     CheckoutComponent,
+    ModalContentComponent,
+    AuthComponent,
+    AdminDashboardComponent,
+    AdminHeaderComponent,
+    AdminDashboardHomeComponent,
+    AdminDashboardCategoriesComponent,
+    AdminDashboardCategoriesDetailsComponent,
+    AdminDashboardOrdersComponent,
+    AdminDashboardOrdersDetailsComponent,
+    AdminDashboardProductsComponent,
+    AdminDashboardProductsDetailsComponent,
   ],
   imports: [
     BrowserModule,

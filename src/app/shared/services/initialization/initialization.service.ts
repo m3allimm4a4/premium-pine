@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, take } from 'rxjs';
+import { BehaviorSubject, filter, map, Observable, switchMap, take } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { Brand } from '../../models/brand.interface';
 import { Category } from '../../models/category.interface';
@@ -25,6 +25,25 @@ export class InitializationService {
         return this.categories$.pipe(take(1));
       })
     );
+  }
+
+  public getCategoryDetails(categoryId: number): Observable<Category> {
+    return this.categories$.pipe(
+      filter(categories => categories.length !== 0),
+      take(1),
+      map(categories => {
+        const category = categories.find(c => c.id === categoryId);
+        if (category) {
+          return category;
+        }
+        throw new Error('Category not found');
+      })
+    );
+  }
+
+  public refreshCategories(): Observable<Category[]> {
+    this.categories$.next([]);
+    return this.getAllCategories();
   }
 
   public getAllBrands(): Observable<Brand[]> {

@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environment/environment';
 import { CartService } from '../cart/cart.service';
-import { OrderResponse } from '../shared/models/order.interface';
+import { Order, OrderResponse } from '../shared/models/order.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CheckoutService {
+export class OrderService {
   constructor(private http: HttpClient, private cartService: CartService) {}
 
   public placeOrder(
@@ -37,5 +37,31 @@ export class CheckoutService {
       items: this.cartService.getItems(),
     };
     return this.http.post<number>(`${environment.api_url}orders.php`, newOrder);
+  }
+
+  public getAllOrders(): Observable<Order[]> {
+    return this.http.get<OrderResponse[]>(`${environment.api_url}orders.php`).pipe(
+      map(orders => {
+        return orders.map(order => {
+          return {
+            ...order,
+            createdDate: new Date(order.createdDate),
+          };
+        });
+      })
+    );
+  }
+
+  public getOrder(orderId: number): Observable<Order> {
+    return this.http
+      .get<OrderResponse>(`${environment.api_url}orders.php`, { params: { id: orderId } })
+      .pipe(
+        map(order => {
+          return {
+            ...order,
+            createdDate: new Date(order.createdDate),
+          };
+        })
+      );
   }
 }

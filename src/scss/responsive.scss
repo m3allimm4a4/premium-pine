@@ -189,7 +189,6 @@ Version:1.0
   }
   .hero-area3 .small-content.secound {
     width: 49%;
-    display: inline-block;
     float: right;
   }
   .hero-area4 .big-content {
@@ -222,15 +221,6 @@ Version:1.0
   }
   .small-banner .single-banner {
     margin-bottom: 18px;
-  }
-  .modal-dialog .quickview-slider-active {
-    width: 720px;
-  }
-  .quickview-content {
-    padding: 40px;
-  }
-  .quickview-content .size .title {
-    margin-top: 16px;
   }
   .midium-banner .single-banner .content {
     padding: 35px;
@@ -640,15 +630,6 @@ Version:1.0
   .small-banner .single-banner {
     margin-bottom: 18px;
   }
-  .modal-dialog .quickview-slider-active {
-    width: 720px;
-  }
-  .quickview-content {
-    padding: 40px;
-  }
-  .quickview-content .size .title {
-    margin-top: 16px;
-  }
   .midium-banner .single-banner .content {
     padding: 35px;
   }
@@ -850,7 +831,6 @@ Version:1.0
   }
   .shopping-cart .table td {
     padding: 0.75rem;
-    vertical-align: top;
     border-top: 1px solid #e9ecef;
     display: block;
     height: auto;
@@ -1014,44 +994,6 @@ Version:1.0
   }
   .footer .single-footer {
     padding: 20px 0;
-  }
-  .modal-dialog .quickview-slider-active {
-    display: none;
-  }
-  .modal-dialog .modal-content .modal-header {
-    right: 15px;
-    top: 12px;
-  }
-  .quickview-content {
-    padding: 30px;
-  }
-  .quickview-content h2 {
-    font-size: 22px;
-  }
-  .quickview-content h3 {
-    font-size: 17px;
-    margin: 10px 0 10px;
-  }
-  .quickview-content .quickview-peragraph p {
-    line-height: 22px;
-  }
-  .quickview-content .size .title {
-    margin-top: 10px;
-  }
-  .modal-dialog .modal-content .modal-header .close {
-    font-size: 9px;
-  }
-  .quickview-content .quantity .input-group {
-    margin-bottom: 10px;
-  }
-  .quickview-content .add-to-cart .btn {
-    height: 42px;
-    padding: 0 25px;
-    line-height: 42px;
-    font-size: 12px;
-  }
-  .quickview-content .add-to-cart .btn.min {
-    line-height: 41px;
   }
 }
 /* Mobile Screen */
@@ -1606,63 +1548,5 @@ Version:1.0
   }
   .footer .single-footer {
     padding: 12px 0;
-  }
-  .modal-dialog .quickview-slider-active {
-    display: none;
-  }
-  .modal-dialog .modal-content .modal-header {
-    right: 15px;
-    top: 12px;
-  }
-  .quickview-content {
-    padding: 30px;
-  }
-  .quickview-content h2 {
-    font-size: 22px;
-  }
-  .quickview-content h3 {
-    font-size: 17px;
-    margin: 10px 0 10px;
-  }
-  .quickview-content .quickview-peragraph p {
-    line-height: 22px;
-  }
-  .quickview-content .size .title {
-    margin-top: 10px;
-  }
-  .modal-dialog .modal-content .modal-header .close {
-    font-size: 9px;
-  }
-  .quickview-content .quantity .input-group {
-    margin-bottom: 10px;
-  }
-  .quickview-content .add-to-cart .btn {
-    height: 42px;
-    padding: 0 25px;
-    line-height: 42px;
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-  .quickview-content .add-to-cart .btn.min {
-    line-height: 41px;
-  }
-  .quickview-content .nice-select {
-    height: 40px;
-  }
-  .quickview-content .quantity .input-number {
-    height: 40px;
-  }
-  .quickview-content h2 {
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .quickview-content .quickview-peragraph p {
-    line-height: 21px;
-    font-size: 13px;
-    font-weight: 400;
-  }
-  .quickview-content h3 {
-    font-size: 15px;
-    margin: 10px 0 10px;
   }
 }

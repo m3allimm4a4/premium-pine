@@ -1,0 +1,87 @@
+<section class="shop checkout section">
+  <div class="container">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-12">
+          <div class="checkout-form">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Name<span>*</span></label>
+                  <input type="text" formControlName="name" required="required" maxlength="100" />
+                  <small *ngIf="displayInvalidFeedback('name')" class="invalid-input">
+                    Name required
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Price<span>*</span></label>
+                  <input type="number" formControlName="price" required="required" min="0" />
+                  <small *ngIf="displayInvalidFeedback('price')" class="invalid-input">
+                    Minimum price is 0
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Description<span>*</span></label>
+                  <input
+                    type="text"
+                    formControlName="description"
+                    maxlength="500"
+                    required="required" />
+                  <small *ngIf="displayInvalidFeedback('description')" class="invalid-input">
+                    Description required
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Old Price<span>*</span></label>
+                  <input type="number" formControlName="oldPrice" min="0" />
+                  <small *ngIf="displayInvalidFeedback('oldPrice')" class="invalid-input">
+                    Minimum old price is 0
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Category<span>*</span></label>
+                  <select
+                    class="form-select"
+                    type="number"
+                    formControlName="categoryId"
+                    required="required">
+                    <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
+                  </select>
+                  <small *ngIf="displayInvalidFeedback('categoryId')" class="invalid-input">
+                    Minimum old price is 0
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <label>Main Image<span>*</span></label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    formControlName="mainImage"
+                    (change)="onFileChange($event, 'mainImageFile')" />
+                  <small *ngIf="displayInvalidFeedback('categoryId')" class="invalid-input">
+                    Main image required
+                  </small>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <button class="btn btn-secondary" type="submit" [disabled]="!form.valid">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

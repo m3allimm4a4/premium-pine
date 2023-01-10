@@ -12,9 +12,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of cartItems">
+    <tr *ngFor="let item of cartItems; let i = index">
       <td class="image" data-title="No">
-        <img [src]="item.product.cardImageUrl" alt="#" />
+        <img [src]="item.product.cardImageUrl" [alt]="item.product.name" />
       </td>
       <td class="product-des" data-title="Description">
         <p class="product-name">
@@ -28,7 +28,13 @@
       </td>
       <td class="qty" data-title="Qty">
         <div class="input-group">
-          <input type="text" class="input-number" min="1" max="255" [value]="item.quantity" />
+          <input
+            type="number"
+            class="input-number"
+            min="1"
+            max="255"
+            [(ngModel)]="item.quantity"
+            (ngModelChange)="onQuantityChanged($event, i)" />
         </div>
       </td>
       <td class="total-amount" data-title="Total">

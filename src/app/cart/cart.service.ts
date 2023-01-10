@@ -7,7 +7,16 @@ import { Product } from '../shared/models/product.interface';
   providedIn: 'root',
 })
 export class CartService {
+  private readonly cartKey = 'cart';
   private cartItems$ = new BehaviorSubject<CartItem[]>([]);
+
+  constructor() {
+    const json = localStorage.getItem(this.cartKey);
+    if (json) {
+      const data: CartItem[] = JSON.parse(json);
+      this.updateCart(data);
+    }
+  }
 
   public getItems$(): Observable<CartItem[]> {
     return this.cartItems$.asObservable();
@@ -41,15 +50,32 @@ export class CartService {
     } else {
       cartItems.push({ product: product, quantity: 1 });
     }
-    this.cartItems$.next(cartItems);
+    this.updateCart(cartItems);
   }
 
-  public removeItem(item: CartItem) {
+  public changeQuantity(quantity: number, index: number): void {
+    const items = this.cartItems$.value;
+    items[index].quantity = quantity;
+    this.updateCart(items);
+  }
+
+  public removeItem(item: CartItem): void {
     const cartItems = this.cartItems$.value;
     const index = cartItems.findIndex(p => p.product.id === item.product.id);
     if (index === -1) return;
 
     cartItems.splice(index, 1);
-    this.cartItems$.next(cartItems);
+    this.updateCart(cartItems);
+  }
+
+  public clearCart(): void {
+    this.updateCart([]);
+  }
+
+  private updateCart(items: CartItem[]): void {
+    this.cartItems$.next(items);
+    items.length
+      ? localStorage.setItem(this.cartKey, JSON.stringify(items))
+      : localStorage.removeItem(this.cartKey);
   }
 }

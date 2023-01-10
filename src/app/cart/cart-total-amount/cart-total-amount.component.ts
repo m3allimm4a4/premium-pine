@@ -9,9 +9,7 @@ import { CartService } from '../cart.service';
 })
 export class CartTotalAmountComponent implements OnInit {
   public subtotal = 0;
-  public shipping = 0;
-  public discount = 0;
-  public coupon = '';
+  public shipping = 5;
   private subscription = new Subscription();
 
   constructor(private cartService: CartService) {}
@@ -23,6 +21,4 @@ export class CartTotalAmountComponent implements OnInit {
       })
     );
   }
-
-  public applyCoupon() {}
 }

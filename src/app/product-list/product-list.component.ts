@@ -27,7 +27,6 @@ export class ProductListComponent implements OnInit {
       const searchString = paramMap.get(FilterBy.search) || '';
 
       this.productListService.getProductList(categoryId, brandId, searchString).subscribe(data => {
-        console.log(data);
         this.productList = data;
         this.productList = this.productListService.sortProductList(this.productList, this.sortBy);
       });

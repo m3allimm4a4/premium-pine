@@ -2,12 +2,7 @@
   <div class="row">
     <div class="col-lg-8 col-md-5 col-12">
       <div class="left">
-        <div class="coupon">
-          <form>
-            <input name="Coupon" placeholder="Enter Your Coupon" [(ngModel)]="coupon" />
-            <button class="btn" (click)="applyCoupon()">Apply</button>
-          </form>
-        </div>
+        <div class="coupon"></div>
       </div>
     </div>
     <div class="col-lg-4 col-md-7 col-12">
@@ -19,11 +14,8 @@
           <li>
             Shipping<span>{{ shipping ? '$' + shipping : 'Free' }}</span>
           </li>
-          <li>
-            You Save<span>${{ discount }}</span>
-          </li>
           <li class="last">
-            You Pay<span>${{ subtotal + shipping - discount }}</span>
+            You Pay<span>${{ subtotal + shipping }}</span>
           </li>
         </ul>
         <div class="button5">

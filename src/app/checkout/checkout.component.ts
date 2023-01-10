@@ -7,10 +7,13 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { race, Subscription, switchMap } from 'rxjs';
 import { CartService } from '../cart/cart.service';
+import { ModalContentComponent } from '../shared/components/modal-content/modal-content.component';
 import { CartItem } from '../shared/models/cart-item.interface';
-import { CheckoutService } from './checkout.service';
+import { OrderService } from './order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -54,11 +57,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   });
 
   public substotal = 0;
-  public shipping = 0;
-  public discount = 0;
+  public shipping = 5;
+  public checkoutDisabled = false;
+  public checkoutLoading = false;
   private subscription = new Subscription();
 
-  constructor(private cartService: CartService, private checkoutService: CheckoutService) {}
+  constructor(
+    private modalService: NgbModal,
+    private router: Router,
+    private cartService: CartService,
+    private checkoutService: OrderService
+  ) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -71,7 +80,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.checkoutForm.controls.cartItems.setValue(items);
       })
     );
-    this.checkoutForm.controls.firstName.touched;
   }
 
   ngOnDestroy(): void {
@@ -88,9 +96,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     const city = this.checkoutForm.controls.city.value;
     const address1 = this.checkoutForm.controls.address1.value;
     const address2 = this.checkoutForm.controls.address2.value;
+    this.checkoutDisabled = true;
+    this.checkoutLoading = true;
     this.checkoutService
       .placeOrder(firstName, lastName, email, phone, city, address1, address2)
-      .subscribe();
+      .pipe(
+        switchMap(orderId => {
+          const modalRef = this.modalService.open(ModalContentComponent);
+          modalRef.componentInstance.header = 'Order Success';
+          modalRef.componentInstance.body = `Order #${orderId}`;
+          return race(modalRef.closed, modalRef.dismissed);
+        })
+      )
+      .subscribe(() => {
+        this.cartService.clearCart();
+        this.router.navigate(['/']);
+      });
   }
 
   public displayInvalidFeedback(controlKey: string): boolean {

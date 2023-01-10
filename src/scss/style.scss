@@ -1939,39 +1939,7 @@ Version:1.0
 .single-product:hover .button-head {
   bottom: 0;
 }
-.single-product .product-img .shop-list-quickview {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 99;
-  margin-top: 20px;
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: all 0.35s ease 0s;
-  -o-transition: all 0.35s ease 0s;
-  transition: all 0.35s ease 0s;
-}
-.single-product .product-img .shop-list-quickview a {
-  color: #000;
-  background-color: #fff;
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  font-size: 18px;
-}
-.single-product .product-img .shop-list-quickview a:hover {
-  background-color: #222;
-  color: #fff;
-}
-.single-product .product-img .shop-list-quickview a i {
-  line-height: 50px;
-}
+
 .single-product .product-content {
   margin-top: 20px;
 }

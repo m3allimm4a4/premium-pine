@@ -4,7 +4,7 @@ import { Category } from './category.interface';
 export interface Product {
   id: number;
   name: string;
-  cardImageUrl: string;
+  cardImageUrl?: string;
   cardHoverImageUrl?: string;
   mainImageUrl?: string;
   price: number;
@@ -27,4 +27,14 @@ export interface ProductResponse {
   brand: Brand;
   createdDate: number;
   description?: string;
+}
+
+export interface ProductCreate {
+  name: string;
+  price: number;
+  oldPrice: number;
+  categoryId: number;
+  brandId: number;
+  createdDate: number;
+  description: string;
 }

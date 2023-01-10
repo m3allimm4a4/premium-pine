@@ -102,11 +102,8 @@
                   <li>
                     (+) Shipping<span>${{ shipping }}</span>
                   </li>
-                  <li>
-                    (-) Discount<span>${{ discount }}</span>
-                  </li>
                   <li class="last">
-                    Total<span>${{ substotal + shipping - discount }}</span>
+                    Total<span>${{ substotal + shipping }}</span>
                   </li>
                 </ul>
               </div>
@@ -129,8 +126,12 @@
                   <button
                     class="btn btn-secondary animate"
                     type="submit"
-                    [disabled]="!checkoutForm.valid">
-                    proceed to checkout
+                    [disabled]="!checkoutForm.valid || checkoutDisabled">
+                    <div
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      *ngIf="checkoutLoading; else checkoutButton"></div>
+                    <ng-template #checkoutButton>Proceed To Checkout</ng-template>
                   </button>
                   <small class="invalid-input" *ngIf="!checkoutForm.controls.cartItems.valid">
                     Your cart is empty

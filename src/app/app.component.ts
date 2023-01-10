@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +7,13 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public currentPage = 'home';
+  public area = 'user';
 
   onActivate(component: Component) {
-    if (component instanceof ContactUsComponent) {
-      this.currentPage = 'contact-us';
+    if (component instanceof AdminDashboardComponent) {
+      this.area = 'admin';
     } else {
-      this.currentPage = 'home';
+      this.area = 'user';
     }
   }
 }

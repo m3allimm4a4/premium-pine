@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DropdownItem } from 'src/app/shared/models/dropdown-item.interface';
 import { SortBy } from '../models/sort-by.enum';
 

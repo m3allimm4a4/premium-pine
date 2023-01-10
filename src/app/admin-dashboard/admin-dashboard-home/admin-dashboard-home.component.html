@@ -1,0 +1,56 @@
+<section id="contact-us" class="contact-us section">
+  <div class="container">
+    <div class="contact-head">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-main">
+            <div class="title">
+              <h3>Sliders</h3>
+            </div>
+            <form class="form" *ngFor="let slider of sliderItems; let i = index">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Title<span>*</span></label>
+                    <input name="title" type="text" [(ngModel)]="slider.title" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Subtitle<span>*</span></label>
+                    <input name="subtitle" type="text" [(ngModel)]="slider.subtitle" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Description<span>*</span></label>
+                    <input name="description" type="text" [(ngModel)]="slider.description" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Url<span>*</span></label>
+                    <input name="url" type="text" [(ngModel)]="slider.url" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>New Image<span>*</span></label>
+                    <input class="form-control" name="image" type="file" />
+                  </div>
+                </div>
+                <div class="col-12" style="padding-top: 7px">
+                  <div class="form-group button">
+                    <button type="submit" class="btn" (click)="onSliderUpdate(slider)">
+                      Update Slider {{ i + 1 }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,3 @@
-<!-- <app-header [currentPage]="currentPage"></app-header> -->
-<app-header></app-header>
+<app-header *ngIf="area === 'user'"></app-header>
 <router-outlet (activate)="onActivate($event)"></router-outlet>
 <app-footer></app-footer>

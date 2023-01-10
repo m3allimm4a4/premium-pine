@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -8,6 +8,5 @@ import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-sv
 })
 export class FooterComponent {
   faFacebook = faFacebookF;
-  faTwitter = faTwitter;
   faInstagram = faInstagram;
 }

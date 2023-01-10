@@ -13,7 +13,7 @@ export interface Order {
   discount: number;
   total: number;
   createdDate: Date;
-  items: CartItem[];
+  items?: CartItem[];
 }
 
 export interface OrderResponse {
@@ -29,5 +29,5 @@ export interface OrderResponse {
   discount: number;
   total: number;
   createdDate: number;
-  items: CartItem[];
+  items?: CartItem[];
 }
