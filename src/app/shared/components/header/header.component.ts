@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
-import { faCartShopping, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faTrash, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',

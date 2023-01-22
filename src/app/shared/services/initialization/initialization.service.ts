@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, filter, map, Observable, switchMap, take } from 'rxjs';
-import { environment } from 'src/environment/environment';
+import { environment } from 'environment/environment';
 import { Brand } from '../../models/brand.interface';
 import { Category } from '../../models/category.interface';
 
@@ -19,7 +19,7 @@ export class InitializationService {
       return this.categories$.pipe(take(1));
     }
 
-    return this.http.get<Category[]>(`${environment.api_url}categories.php`).pipe(
+    return this.http.get<Category[]>(`${environment.api_url}categories`).pipe(
       switchMap(categories => {
         this.categories$.next(categories);
         return this.categories$.pipe(take(1));
@@ -51,7 +51,7 @@ export class InitializationService {
       return this.brands$.pipe(take(1));
     }
 
-    return this.http.get<Brand[]>(`${environment.api_url}brands.php`).pipe(
+    return this.http.get<Brand[]>(`${environment.api_url}brands`).pipe(
       switchMap(brands => {
         this.brands$.next(brands);
         return this.brands$.pipe(take(1));

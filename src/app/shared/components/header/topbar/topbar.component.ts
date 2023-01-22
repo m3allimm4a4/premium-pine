@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faHeadphones, faLocationPin, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEnvelope,
+  faHeadphones,
+  faLocationPin,
+  faPowerOff,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-topbar',

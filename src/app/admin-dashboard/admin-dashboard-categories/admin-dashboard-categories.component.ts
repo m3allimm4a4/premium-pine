@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/shared/models/category.interface';
 import { InitializationService } from 'src/app/shared/services/initialization/initialization.service';
-import { environment } from 'src/environment/environment';
+import { environment } from 'environment/environment';
 
 @Component({
   selector: 'app-admin-dashboard-categories',

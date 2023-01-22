@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ProductListService } from 'src/app/product-list/product-list.service';
 import { Product } from 'src/app/shared/models/product.interface';
-import { environment } from 'src/environment/environment';
+import { environment } from 'environment/environment';
 
 @Component({
   selector: 'app-admin-dashboard-products',

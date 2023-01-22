@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { environment } from 'src/environment/environment';
+import { environment } from 'environment/environment';
 import { Product, ProductResponse } from '../shared/models/product.interface';
 import { SortBy } from './models/sort-by.enum';
 
@@ -27,7 +27,7 @@ export class ProductListService {
       parameters = { ...parameters, search: searchString };
     }
     return this.http
-      .get<ProductResponse[]>(`${environment.api_url}products.php`, { params: parameters })
+      .get<ProductResponse[]>(`${environment.api_url}products`, { params: parameters })
       .pipe(
         map(products => {
           return products.map(product => {

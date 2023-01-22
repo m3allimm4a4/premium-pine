@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { CartItem } from '../shared/models/cart-item.interface';
 import { Product } from '../shared/models/product.interface';
@@ -10,11 +11,13 @@ export class CartService {
   private readonly cartKey = 'cart';
   private cartItems$ = new BehaviorSubject<CartItem[]>([]);
 
-  constructor() {
-    const json = localStorage.getItem(this.cartKey);
-    if (json) {
-      const data: CartItem[] = JSON.parse(json);
-      this.updateCart(data);
+  constructor(@Inject(PLATFORM_ID) private platformId: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      const json = localStorage.getItem(this.cartKey);
+      if (json) {
+        const data: CartItem[] = JSON.parse(json);
+        this.updateCart(data);
+      }
     }
   }
 
@@ -73,9 +76,11 @@ export class CartService {
   }
 
   private updateCart(items: CartItem[]): void {
-    this.cartItems$.next(items);
-    items.length
-      ? localStorage.setItem(this.cartKey, JSON.stringify(items))
-      : localStorage.removeItem(this.cartKey);
+    if (isPlatformBrowser(this.platformId)) {
+      this.cartItems$.next(items);
+      items.length
+        ? localStorage.setItem(this.cartKey, JSON.stringify(items))
+        : localStorage.removeItem(this.cartKey);
+    }
   }
 }

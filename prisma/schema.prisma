@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model banners {
+  id       Int    @id @default(autoincrement()) @db.UnsignedInt
+  title    String @db.VarChar(100)
+  subtitle String @db.VarChar(100)
+  imageUrl String @db.VarChar(500)
+  url      String @db.VarChar(255)
+}
+
+model brands {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  products products[]
+}
+
+model categories {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(255)
+  products products[]
+}
+
+model orderproducts {
+  id        Int      @id @default(autoincrement())
+  productId Int      @db.UnsignedInt
+  orderId   Int      @db.UnsignedInt
+  quantity  Int
+  unitPrice Int
+  orders    orders   @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "fk_orderproducts_orderId")
+  products  products @relation(fields: [productId], references: [id], onDelete: Cascade, map: "fk_orderproducts_productId")
+
+  @@index([orderId], map: "fk_orderproducts_orderId")
+  @@index([productId], map: "fk_orderproducts_productId")
+}
+
+model orders {
+  id            Int             @id @default(autoincrement()) @db.UnsignedInt
+  firstName     String          @db.VarChar(100)
+  lastName      String          @db.VarChar(100)
+  email         String          @db.VarChar(100)
+  phone         String          @db.VarChar(100)
+  city          String          @db.VarChar(100)
+  address1      String          @db.VarChar(255)
+  address2      String          @db.VarChar(255)
+  subtotal      Int
+  total         Int
+  discount      Int
+  createdDate   DateTime        @default(now()) @db.Timestamp()
+  orderproducts orderproducts[]
+}
+
+model products {
+  id                Int             @id @default(autoincrement()) @db.UnsignedInt
+  name              String          @db.VarChar(255)
+  price             Int
+  oldPrice          Int
+  cardImageUrl      String          @db.VarChar(255)
+  cardHoverImageUrl String          @db.VarChar(255)
+  mainImageUrl      String          @db.VarChar(255)
+  description       String          @db.Text
+  createdDate       DateTime        @default(now()) @db.Timestamp()
+  trending          Boolean
+  categoryId        Int
+  brandId           Int
+  orderproducts     orderproducts[]
+  brand             brands          @relation(fields: [brandId], references: [id], onDelete: Cascade, map: "fk_product_brandId")
+  category          categories      @relation(fields: [categoryId], references: [id], onDelete: Cascade, map: "fk_product_categoryId")
+
+  @@index([brandId], map: "fk_product_brandId")
+  @@index([categoryId], map: "fk_product_categoryId")
+}
+
+model slider {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(100)
+  subtitle    String @db.VarChar(100)
+  description String @db.VarChar(100)
+  imageUrl    String @db.VarChar(500)
+  url         String @db.VarChar(255)
+}

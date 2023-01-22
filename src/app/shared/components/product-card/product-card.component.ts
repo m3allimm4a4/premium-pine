@@ -7,7 +7,7 @@ import { CartService } from '../../../cart/cart.service';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ItemCardComponent {
+export class ProductCardComponent {
   @Input() product: Product = {} as Product;
 
   constructor(private cartService: CartService) {}

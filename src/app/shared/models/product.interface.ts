@@ -19,14 +19,14 @@ export interface ProductResponse {
   id: number;
   name: string;
   cardImageUrl: string;
-  cardHoverImageUrl?: string;
-  mainImageUrl?: string;
+  cardHoverImageUrl: string;
+  mainImageUrl: string;
   price: number;
-  oldPrice?: number;
+  oldPrice: number;
   category: Category;
   brand: Brand;
-  createdDate: number;
-  description?: string;
+  createdDate: string;
+  description: string;
 }
 
 export interface ProductCreate {
