@@ -27,15 +27,9 @@ export class AdminDashboardCategoriesComponent implements OnInit {
   }
 
   public deleteCategory(category: Category): void {
-    this.http
-      .delete<void>(`${environment.api_url}categories.php`, {
-        params: {
-          id: category.id,
-        },
-      })
-      .subscribe(() => {
-        this.refreshCategories();
-      });
+    this.http.delete<void>(`${environment.api_url}categories/${category.id}`).subscribe(() => {
+      this.refreshCategories();
+    });
   }
 
   private refreshCategories(): void {

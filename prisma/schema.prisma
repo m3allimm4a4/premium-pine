@@ -34,26 +34,26 @@ model orderproducts {
   quantity  Int
   unitPrice Int
   orders    orders   @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "fk_orderproducts_orderId")
-  products  products @relation(fields: [productId], references: [id], onDelete: Cascade, map: "fk_orderproducts_productId")
+  product   products @relation(fields: [productId], references: [id], onDelete: Cascade, map: "fk_orderproducts_productId")
 
   @@index([orderId], map: "fk_orderproducts_orderId")
   @@index([productId], map: "fk_orderproducts_productId")
 }
 
 model orders {
-  id            Int             @id @default(autoincrement()) @db.UnsignedInt
-  firstName     String          @db.VarChar(100)
-  lastName      String          @db.VarChar(100)
-  email         String          @db.VarChar(100)
-  phone         String          @db.VarChar(100)
-  city          String          @db.VarChar(100)
-  address1      String          @db.VarChar(255)
-  address2      String          @db.VarChar(255)
-  subtotal      Int
-  total         Int
-  discount      Int
-  createdDate   DateTime        @default(now()) @db.Timestamp()
-  orderproducts orderproducts[]
+  id          Int             @id @default(autoincrement()) @db.UnsignedInt
+  firstName   String          @db.VarChar(100)
+  lastName    String          @db.VarChar(100)
+  email       String          @db.VarChar(100)
+  phone       String          @db.VarChar(100)
+  city        String          @db.VarChar(100)
+  address1    String          @db.VarChar(255)
+  address2    String          @db.VarChar(255)
+  subtotal    Int
+  total       Int
+  discount    Int
+  createdDate DateTime        @default(now()) @db.Timestamp()
+  items       orderproducts[]
 }
 
 model products {

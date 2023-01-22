@@ -36,11 +36,11 @@ export class OrderService {
       createdDate: new Date().valueOf(),
       items: this.cartService.getItems(),
     };
-    return this.http.post<number>(`${environment.api_url}orders.php`, newOrder);
+    return this.http.post<number>(`${environment.api_url}orders`, newOrder);
   }
 
   public getAllOrders(): Observable<Order[]> {
-    return this.http.get<OrderResponse[]>(`${environment.api_url}orders.php`).pipe(
+    return this.http.get<OrderResponse[]>(`${environment.api_url}orders`).pipe(
       map(orders => {
         return orders.map(order => {
           return {
@@ -53,15 +53,13 @@ export class OrderService {
   }
 
   public getOrder(orderId: number): Observable<Order> {
-    return this.http
-      .get<OrderResponse>(`${environment.api_url}orders.php`, { params: { id: orderId } })
-      .pipe(
-        map(order => {
-          return {
-            ...order,
-            createdDate: new Date(order.createdDate),
-          };
-        })
-      );
+    return this.http.get<OrderResponse>(`${environment.api_url}orders/${orderId}`).pipe(
+      map(order => {
+        return {
+          ...order,
+          createdDate: new Date(order.createdDate),
+        };
+      })
+    );
   }
 }

@@ -1,10 +1,11 @@
+import { catchAsync } from 'api/catchAsync';
 import { prisma } from 'api/models/prismaClient';
 import { PrismaFindAllQuery } from 'api/models/prismaFindAllQuery.interface';
 import * as express from 'express';
 
-export async function getProducts(req: express.Request, res: express.Response): Promise<void> {
-  const query: PrismaFindAllQuery = {};
-  try {
+export const getProducts = catchAsync(
+  async (req: express.Request, res: express.Response): Promise<void> => {
+    const query: PrismaFindAllQuery = {};
     if (req.query['category']) {
       query.where = {
         ...query.where,
@@ -42,15 +43,11 @@ export async function getProducts(req: express.Request, res: express.Response): 
       ...query,
     });
     res.status(200).json(products);
-  } catch (error: any) {
-    res.status(500).json({
-      message: error.message,
-    });
   }
-}
+);
 
-export async function getProduct(req: express.Request, res: express.Response): Promise<void> {
-  try {
+export const getProduct = catchAsync(
+  async (req: express.Request, res: express.Response): Promise<void> => {
     const id = +req.params['id'];
     if (!id) throw new Error('You must provide a product ID');
     const product = await prisma.products.findFirstOrThrow({
@@ -63,9 +60,23 @@ export async function getProduct(req: express.Request, res: express.Response): P
       },
     });
     res.status(200).json(product);
-  } catch (error: any) {
-    res.status(500).json({
-      message: error?.message,
-    });
   }
-}
+);
+
+export const deleteProducts = catchAsync(
+  async (req: express.Request, res: express.Response): Promise<void> => {
+    const id = +req.params['id'];
+    if (!id) throw new Error('You must provide a product ID');
+
+    const product = await prisma.products.findFirstOrThrow({
+      include: {
+        category: { select: { id: true, name: true } },
+        brand: { select: { id: true, name: true } },
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).json(product);
+  }
+);

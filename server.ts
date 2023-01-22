@@ -13,6 +13,7 @@ import { categoriesRoutes } from 'api/routes/categoriesRoutes';
 import { bannersRoutes } from 'api/routes/bannersRoutes';
 import { brandsRoutes } from 'api/routes/brandsRoutes';
 import { productsRoutes } from 'api/routes/productsRoutes';
+import { ordersRoutes } from 'api/routes/ordersRoutes';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -42,6 +43,7 @@ export function app(): express.Express {
   server.use('/api/categories', categoriesRoutes);
   server.use('/api/brands', brandsRoutes);
   server.use('/api/products', productsRoutes);
+  server.use('/api/orders', ordersRoutes);
 
   server.get('/api/**', (req, res) => {
     res.status(404).json({ message: `route doesn't exist` });
