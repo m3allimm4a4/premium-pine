@@ -93,22 +93,38 @@ export const createProduct = catchAsync(async (req: Request, res: Response): Pro
     saveUploadedFile(cardHoverImage),
   ]);
 
-  await prisma.products.create({
-    data: {
-      name: req.body.name,
-      price: req.body.price,
-      oldPrice: req.body.oldPrice,
-      mainImageUrl: join(environment.imagesLocation, mainImageName),
-      cardImageUrl: join(environment.imagesLocation, cardImageName),
-      cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
-      description: req.body.description,
-      trending: req.body.trending,
-      categoryId: req.body.categoryId,
-      brandId: req.body.brandId,
-      createdDate: new Date(),
-    },
-  });
-
+  try {
+    await prisma.products.create({
+      data: {
+        name: req.body.name,
+        price: +req.body.price,
+        oldPrice: +req.body.oldPrice,
+        mainImageUrl: join(environment.imagesLocation, mainImageName),
+        cardImageUrl: join(environment.imagesLocation, cardImageName),
+        cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
+        description: req.body.description,
+        trending: Boolean(req.body.trending),
+        category: {
+          connect: {
+            id: +req.body.categoryId,
+          },
+        },
+        brand: {
+          connect: {
+            id: +req.body.brandId,
+          },
+        },
+        createdDate: new Date(),
+      },
+    });
+  } catch (error) {
+    await Promise.all([
+      deleteImageFile(mainImageName),
+      deleteImageFile(cardImageName),
+      deleteImageFile(cardHoverImageName),
+    ]);
+    throw error;
+  }
   res.status(200).json(null);
 });
 

@@ -101,10 +101,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.checkoutService
       .placeOrder(firstName, lastName, email, phone, city, address1, address2)
       .pipe(
-        switchMap(orderId => {
+        switchMap(order => {
           const modalRef = this.modalService.open(ModalContentComponent);
           modalRef.componentInstance.header = 'Order Success';
-          modalRef.componentInstance.body = `Order #${orderId}`;
+          modalRef.componentInstance.body = `Order #${order.id}`;
           return race(modalRef.closed, modalRef.dismissed);
         })
       )

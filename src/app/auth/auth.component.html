@@ -18,12 +18,12 @@
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label>Password<span>*</span></label>
-                    <input name="password" type="text" [(ngModel)]="password" />
+                    <input name="password" type="password" [(ngModel)]="password" />
                   </div>
                 </div>
                 <div class="col-12" style="padding-top: 7px">
                   <div class="form-group button">
-                    <button type="submit" class="btn" (click)="onLogin()">Send Message</button>
+                    <button type="submit" class="btn" (click)="onLogin()">Login</button>
                   </div>
                   <small *ngIf="showMessage">Invalid Credentials</small>
                 </div>

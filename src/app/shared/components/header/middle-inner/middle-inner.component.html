@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-2 col-md-2 col-12">
         <div class="logo">
-          <a routerLink="/"><img src="/assets/logo2.jpeg" width="60" alt="LOGO" /></a>
+          <a routerLink="/"><img src="/assets/logo.png" width="60" alt="LOGO" /></a>
         </div>
 
         <div class="search-top">
@@ -52,6 +52,9 @@
                 </ul>
               </li>
               <li routerLinkActive="active">
+                <a routerLink="/cart">View Cart</a>
+              </li>
+              <li routerLinkActive="active">
                 <a routerLink="/contact-us">Contact Us</a>
               </li>
             </ul>
@@ -83,7 +86,7 @@
           </div>
 
           <div class="sinlge-bar shopping">
-            <a routerLink="/cart" class="single-icon">
+            <a [routerLink]="[]" class="single-icon">
               <fa-icon [icon]="faBagShopping"></fa-icon>
               <span class="total-count">{{ cartItemCount }}</span>
             </a>

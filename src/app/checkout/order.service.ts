@@ -19,7 +19,7 @@ export class OrderService {
     city: string,
     address1: string,
     address2: string
-  ): Observable<number> {
+  ): Observable<Order> {
     const subtotal = this.cartService.getTotalAmount();
     const discount = 0;
     const newOrder: OrderResponse = {
@@ -36,7 +36,7 @@ export class OrderService {
       createdDate: new Date().valueOf(),
       items: this.cartService.getItems(),
     };
-    return this.http.post<number>(`${environment.api_url}orders`, newOrder);
+    return this.http.post<Order>(`${environment.api_url}orders`, newOrder);
   }
 
   public getAllOrders(): Observable<Order[]> {
