@@ -12,6 +12,8 @@ export const getOrders = catchAsync(
 
 export const getOrder = catchAsync(
   async (req: express.Request, res: express.Response): Promise<void> => {
+    if (!req.params['id']) throw new Error('Missing Order ID');
+
     const order = await prisma.orders.findFirstOrThrow({
       include: {
         items: {
@@ -34,6 +36,9 @@ export const getOrder = catchAsync(
             },
           },
         },
+      },
+      where: {
+        id: +req.params['id'],
       },
     });
     res.status(200).json(order);
