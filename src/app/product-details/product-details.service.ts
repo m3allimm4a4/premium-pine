@@ -50,9 +50,6 @@ export class ProductDetailsService {
     formData.set('brandId', product.brandId.toString());
     formData.set('categoryId', product.categoryId.toString());
 
-    return this.http.post<void>(
-      `${environment.api_url}products.php${id ? `?id=${id}` : ''}`,
-      formData
-    );
+    return this.http.post<void>(`${environment.api_url}products${id ? `/${id}` : ''}`, formData);
   }
 }

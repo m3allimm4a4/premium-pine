@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/shared/models/category.interface';
 import { InitializationService } from 'src/app/shared/services/initialization/initialization.service';
@@ -14,7 +14,10 @@ export class HeaderInnerComponent implements OnInit {
 
   public categories: Category[] = [];
 
-  constructor(private initService: InitializationService) {}
+  constructor(
+    private initService: InitializationService,
+    @Inject(PLATFORM_ID) private platformId: string
+  ) {}
 
   ngOnInit(): void {
     this.initService.getAllCategories().subscribe(categories => {

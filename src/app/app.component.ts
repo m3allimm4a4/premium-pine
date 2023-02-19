@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +7,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 })
 export class AppComponent {
   public area = 'user';
+
+  constructor(@Inject(PLATFORM_ID) private platformId: string) {}
 
   onActivate(component: Component) {
     if (component instanceof AdminDashboardComponent) {

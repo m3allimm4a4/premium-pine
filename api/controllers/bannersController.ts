@@ -1,4 +1,4 @@
-import { catchAsync } from 'api/catchAsync';
+import { catchAsync } from 'api/shared/catchAsync';
 import { prisma } from 'api/models/prismaClient';
 import * as express from 'express';
 

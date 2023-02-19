@@ -2,23 +2,25 @@ import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
 import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import * as fileUpload from 'express-fileupload';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
-import { AppServerModule } from './src/main.server';
-import { sliderRoutes } from 'api/routes/sliderRoutes';
-import { categoriesRoutes } from 'api/routes/categoriesRoutes';
 import { bannersRoutes } from 'api/routes/bannersRoutes';
 import { brandsRoutes } from 'api/routes/brandsRoutes';
-import { productsRoutes } from 'api/routes/productsRoutes';
+import { categoriesRoutes } from 'api/routes/categoriesRoutes';
 import { ordersRoutes } from 'api/routes/ordersRoutes';
+import { productsRoutes } from 'api/routes/productsRoutes';
+import { sliderRoutes } from 'api/routes/sliderRoutes';
+import { AppServerModule } from './src/main.server';
+import { environment } from 'environment/environment';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/premium-pine/browser');
+  const distFolder = join(process.cwd(), environment.staticFilesLocation);
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';
@@ -36,6 +38,16 @@ export function app(): express.Express {
 
   // Middlewares
   server.use(bodyParser.json());
+  server.use(bodyParser.urlencoded({ extended: true }));
+  server.use(
+    fileUpload({
+      createParentPath: true,
+      limits: { fileSize: 100 * 1024 * 1024 },
+      limitHandler: true,
+      abortOnLimit: true,
+      responseOnLimit: 'Files cannot be larger than 100 mb',
+    })
+  );
 
   // Express Rest API
   server.use('/api/banners', bannersRoutes);

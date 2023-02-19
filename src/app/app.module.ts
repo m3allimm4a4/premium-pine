@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -29,6 +30,7 @@ import { TopbarComponent } from './shared/components/header/topbar/topbar.compon
     FormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    NgbCollapseModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

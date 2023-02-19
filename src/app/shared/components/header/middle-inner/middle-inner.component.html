@@ -7,9 +7,6 @@
         </div>
 
         <div class="search-top">
-          <div class="top-search">
-            <a><fa-icon [icon]="faMagnifyingGlass"></fa-icon></a>
-          </div>
           <div class="search-top">
             <form class="search-form">
               <input
@@ -24,7 +21,42 @@
           </div>
         </div>
 
-        <div class="mobile-nav"></div>
+        <div class="mobile-navv">
+          <div class="slicknav_menu">
+            <a class="slicknav_btn" (click)="navbarCollapsed = !navbarCollapsed">
+              <span class="slicknav_menutxt"></span>
+              <span class="slicknav_icon slicknav_no-text">
+                <span class="slicknav_icon-bar"></span>
+                <span class="slicknav_icon-bar"></span>
+                <span class="slicknav_icon-bar"></span>
+              </span>
+            </a>
+
+            <ul class="slicknav_nav" [ngbCollapse]="navbarCollapsed">
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                <a routerLink="/">Home</a>
+              </li>
+              <li routerLinkActive="active">
+                <a [routerLink]="[]" (click)="onCategoriesClick()">
+                  Categories
+                  <fa-icon [icon]="categoriesAngle"></fa-icon>
+                </a>
+                <ul class="dropdown">
+                  <div [ngbCollapse]="categoriesCollapsed">
+                    <li *ngFor="let item of categories">
+                      <a routerLink="/product-list" [queryParams]="{ category: item.id }">
+                        {{ item.name }}
+                      </a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+              <li routerLinkActive="active">
+                <a routerLink="/contact-us">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div class="col-lg-8 col-md-7 col-12">
         <div class="search-bar-top">

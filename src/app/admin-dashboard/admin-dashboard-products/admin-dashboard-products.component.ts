@@ -27,11 +27,9 @@ export class AdminDashboardProductsComponent implements OnInit {
   }
 
   public deleteProduct(product: Product): void {
-    this.http
-      .delete<void>(`${environment.api_url}products.php`, { params: { id: product.id } })
-      .subscribe(() => {
-        this.refreshProducts();
-      });
+    this.http.delete<void>(`${environment.api_url}products/${product.id}`).subscribe(() => {
+      this.refreshProducts();
+    });
   }
 
   private refreshProducts(): void {
