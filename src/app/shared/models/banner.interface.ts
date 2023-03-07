@@ -4,4 +4,5 @@ export interface Banner {
   subtitle: string;
   imageUrl: string;
   url: string;
+  imageFile?: File;
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { iif, map, Observable } from 'rxjs';
 import { environment } from 'environment/environment';
 import { Product, ProductCreate, ProductResponse } from '../shared/models/product.interface';
 
@@ -49,7 +49,10 @@ export class ProductDetailsService {
     formData.set('trending', `${product.trending ? 1 : 0}`);
     formData.set('brandId', product.brandId.toString());
     formData.set('categoryId', product.categoryId.toString());
-
-    return this.http.post<void>(`${environment.api_url}products${id ? `/${id}` : ''}`, formData);
+    return iif(
+      () => !id,
+      this.http.post<void>(`${environment.api_url}products${id ? `/${id}` : ''}`, formData),
+      this.http.put<void>(`${environment.api_url}products${id ? `/${id}` : ''}`, formData)
+    );
   }
 }

@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { environment } from 'environment/environment';
 import { UploadedFile } from 'express-fileupload';
 import { join } from 'path';
-import { rm } from 'fs/promises';
+import { rm, access } from 'fs/promises';
 
 const imagesPath = join(process.cwd(), environment.staticFilesLocation, environment.imagesLocation);
 
@@ -23,5 +23,10 @@ export const saveUploadedFile = async (file: UploadedFile): Promise<string> => {
 
 export const deleteImageFile = async (imageName: string): Promise<void> => {
   const path = join(imagesPath, imageName);
-  await rm(path);
+  try {
+    await access(path);
+    await rm(path);
+  } catch (error) {
+    return;
+  }
 };

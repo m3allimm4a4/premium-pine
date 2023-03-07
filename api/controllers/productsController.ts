@@ -67,16 +67,12 @@ export const deleteProducts = catchAsync(async (req: Request, res: Response): Pr
   const id = +req.params['id'];
   if (!id) throw new Error('You must provide a product ID');
 
-  const product = await prisma.products.findFirstOrThrow({
-    include: {
-      category: { select: { id: true, name: true } },
-      brand: { select: { id: true, name: true } },
-    },
+  await prisma.products.delete({
     where: {
       id: id,
     },
   });
-  res.status(200).json(product);
+  res.status(200).json(null);
 });
 
 export const createProduct = catchAsync(async (req: Request, res: Response): Promise<void> => {
@@ -135,10 +131,6 @@ export const updateProduct = catchAsync(async (req: Request, res: Response): Pro
   if (Object.keys(req.files).length < 3) throw new Error('Some images are missing');
 
   const product = await prisma.products.findFirstOrThrow({
-    include: {
-      category: { select: { id: true, name: true } },
-      brand: { select: { id: true, name: true } },
-    },
     where: {
       id: id,
     },
@@ -160,23 +152,40 @@ export const updateProduct = catchAsync(async (req: Request, res: Response): Pro
     saveUploadedFile(cardHoverImage),
   ]);
 
-  await prisma.products.update({
-    where: {
-      id: id,
-    },
-    data: {
-      name: req.body.name,
-      price: req.body.price,
-      oldPrice: req.body.oldPrice,
-      mainImageUrl: join(environment.imagesLocation, mainImageName),
-      cardImageUrl: join(environment.imagesLocation, cardImageName),
-      cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
-      description: req.body.description,
-      trending: req.body.trending,
-      categoryId: req.body.categoryId,
-      brandId: req.body.brandId,
-    },
-  });
+  try {
+    await prisma.products.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: req.body.name,
+        price: +req.body.price,
+        oldPrice: +req.body.oldPrice,
+        mainImageUrl: join(environment.imagesLocation, mainImageName),
+        cardImageUrl: join(environment.imagesLocation, cardImageName),
+        cardHoverImageUrl: join(environment.imagesLocation, cardHoverImageName),
+        description: req.body.description,
+        trending: Boolean(req.body.trending),
+        category: {
+          connect: {
+            id: +req.body.categoryId,
+          },
+        },
+        brand: {
+          connect: {
+            id: +req.body.brandId,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    await Promise.all([
+      deleteImageFile(mainImageName),
+      deleteImageFile(cardImageName),
+      deleteImageFile(cardHoverImageName),
+    ]);
+    throw error;
+  }
 
   res.status(200).json(null);
 });

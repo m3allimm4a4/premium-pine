@@ -1,13 +1,13 @@
-<section id="contact-us" class="contact-us section">
+<section class="contact-us section">
   <div class="container">
     <div class="contact-head">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12" *ngFor="let slider of sliderItems; let i = index">
           <div class="form-main">
             <div class="title">
-              <h3>Sliders</h3>
+              <h3>Slider Image {{ i + 1 }}</h3>
             </div>
-            <form class="form" *ngFor="let slider of sliderItems; let i = index">
+            <form class="form">
               <div class="row">
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
@@ -36,13 +36,64 @@
                 <div class="col-lg-6 col-12">
                   <div class="form-group">
                     <label>New Image<span>*</span></label>
-                    <input class="form-control" name="image" type="file" />
+                    <input
+                      class="form-control"
+                      name="image"
+                      type="file"
+                      (change)="onFileChange($event, slider)" />
                   </div>
                 </div>
                 <div class="col-12" style="padding-top: 7px">
                   <div class="form-group button">
                     <button type="submit" class="btn" (click)="onSliderUpdate(slider)">
-                      Update Slider {{ i + 1 }}
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-12" style="padding-top: 20px" *ngFor="let banner of banners; let i = index">
+          <div class="form-main">
+            <div class="title">
+              <h3>Banner {{ i + 1 }}</h3>
+            </div>
+            <form class="form">
+              <div class="row">
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Title<span>*</span></label>
+                    <input name="title" type="text" [(ngModel)]="banner.title" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Subtitle<span>*</span></label>
+                    <input name="subtitle" type="text" [(ngModel)]="banner.subtitle" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>Url<span>*</span></label>
+                    <input name="url" type="text" [(ngModel)]="banner.url" />
+                  </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                  <div class="form-group">
+                    <label>New Image<span>*</span></label>
+                    <input
+                      class="form-control"
+                      name="image"
+                      type="file"
+                      (change)="onFileChange($event, banner)" />
+                  </div>
+                </div>
+                <div class="col-12" style="padding-top: 7px">
+                  <div class="form-group button">
+                    <button type="submit" class="btn" (click)="onBannerUpdate(banner)">
+                      Update
                     </button>
                   </div>
                 </div>
