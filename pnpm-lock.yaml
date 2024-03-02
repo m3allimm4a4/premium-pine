@@ -45,8 +45,8 @@ dependencies:
     specifier: ^6.2.0
     version: 6.2.1
   '@ng-bootstrap/ng-bootstrap':
-    specifier: ^14.0.0
-    version: 14.0.1(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/forms@16.2.12)(@angular/localize@16.2.12)(@popperjs/core@2.11.6)(rxjs@7.5.7)
+    specifier: ^15.1.2
+    version: 15.1.2(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/forms@16.2.12)(@angular/localize@16.2.12)(@popperjs/core@2.11.6)(rxjs@7.5.7)
   '@nguniversal/express-engine':
     specifier: ^15.1.0
     version: 15.1.0(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/platform-server@16.2.12)(express@4.18.2)
@@ -2533,13 +2533,13 @@ packages:
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
     dev: true
 
-  /@ng-bootstrap/ng-bootstrap@14.0.1(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/forms@16.2.12)(@angular/localize@16.2.12)(@popperjs/core@2.11.6)(rxjs@7.5.7):
-    resolution: {integrity: sha512-JF4U4IIix+g6VBFfG8stf0Un5K//ypoN+pTuRs6kjUhsHBsa2m7yKE6bCe3fMhatFZFr2fcSswDzRUnAUiHhWg==}
+  /@ng-bootstrap/ng-bootstrap@15.1.2(@angular/common@16.2.12)(@angular/core@16.2.12)(@angular/forms@16.2.12)(@angular/localize@16.2.12)(@popperjs/core@2.11.6)(rxjs@7.5.7):
+    resolution: {integrity: sha512-mM2yiGnt9o7KZLIFp8K1vjfmVfu7HR3d8dhH5SszfArbgn9DvvQ4P5D5TDGygzyBSzeyZe18p7I8rX8vgA6DKw==}
     peerDependencies:
-      '@angular/common': ^15.0.0
-      '@angular/core': ^15.0.0
-      '@angular/forms': ^15.0.0
-      '@angular/localize': ^15.0.0
+      '@angular/common': ^16.0.0
+      '@angular/core': ^16.0.0
+      '@angular/forms': ^16.0.0
+      '@angular/localize': ^16.0.0
       '@popperjs/core': ^2.11.6
       rxjs: ^6.5.3 || ^7.4.0
     dependencies:
@@ -2549,7 +2549,7 @@ packages:
       '@angular/localize': 16.2.12(@angular/compiler-cli@16.2.12)(@angular/compiler@16.2.12)
       '@popperjs/core': 2.11.6
       rxjs: 7.5.7
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: false
 
   /@ngtools/webpack@16.2.12(@angular/compiler-cli@16.2.12)(typescript@5.1.6)(webpack@5.88.2):
